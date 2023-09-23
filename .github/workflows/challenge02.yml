@@ -1,0 +1,43 @@
+name: first
+
+on: 
+  push:
+      branches:
+      - '02_challenge'
+
+jobs:
+    job1:
+        name: Job 1
+        runs-on: ubuntu-latest
+        steps:
+            - name: Step one
+              uses: actions/checkout@v2
+            - name: Step two
+              run:  |
+                    date
+                    echo $(pwd) 
+                    touch test_file_job1
+    job2:
+        name: Job 2
+        runs-on: ubuntu-latest
+        steps:
+            - name: Step one
+              uses: actions/checkout@v2
+            - name: Step two
+              run:  |
+                    date
+                    echo $(pwd) 
+                    touch test_file_job2
+    job3:
+        name: Job 3
+        needs:
+          - job1
+          - job2
+        runs-on: ubuntu-latest
+        steps:
+            - name: Step one
+              uses: actions/checkout@v2
+            - name: Step two
+              run:  |
+                    date
+                    ls -la
